@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { firestore } from "firebase";
-import { Select, Input } from "antd";
+import { Select, Input, message } from "antd";
 import {
   Wrapper,
   StyledButton,
@@ -15,7 +15,6 @@ function Sales() {
   let history = useHistory();
   const [form] = StyledForm.useForm();
   const [itemList, setItemList] = useState([]);
-  const [displayItemId, setDisplayItemId] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,9 +53,10 @@ function Sales() {
       };
       console.log("the docData", docData);
       await doc.set(docData);
+      message.success("Sales entry added successfully");
       history.push("/");
     } else {
-      console.log("Error in docData");
+      message.error("Error occurred");
     }
   };
 
@@ -83,10 +83,7 @@ function Sales() {
           </div>
         </Link>
         <StyledItem label="Item" rules={[{ required: true }]} name="itemName">
-          <Select
-            placeholder="Select a option"
-            onChange={(itemId) => setDisplayItemId(itemId)}
-          >
+          <Select placeholder="Select a option">
             {itemList.map((itemObj) => {
               return <Option value={itemObj.id}>{itemObj.itemName}</Option>;
             })}

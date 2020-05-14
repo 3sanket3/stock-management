@@ -35,7 +35,12 @@ function Home() {
       </StyledLink>
       <StyledLink to={"/home/stock-summary"}>
         <div>
-          <button type="button">StockSummary</button>
+          <button type="button">Stock Summary</button>
+        </div>
+      </StyledLink>
+      <StyledLink to={"/home/transactions"}>
+        <div>
+          <button type="button">Transactions</button>
         </div>
       </StyledLink>
     </Wrapper>

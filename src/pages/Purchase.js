@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { firestore } from "firebase";
-import { Select, Input } from "antd";
+import { Select, Input, message } from "antd";
 import {
   Wrapper,
   StyledButton,
@@ -15,7 +15,6 @@ function Purchase() {
   let history = useHistory();
   const [form] = StyledForm.useForm();
   const [itemList, setItemList] = useState([]);
-  const [displayItemId, setDisplayItemId] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,9 +52,10 @@ function Purchase() {
       };
       console.log("the docData", docData);
       await doc.set(docData);
+      message.success("Purchase entry added successfully");
       history.push("/");
     } else {
-      console.log("Error in docData");
+      message.error("Error occurred");
     }
   };
   const onFinishFailed = (errorInfo) => {
@@ -80,10 +80,7 @@ function Purchase() {
           </div>
         </Link>
         <StyledItem label="Item" rules={[{ required: true }]} name="itemName">
-          <Select
-            placeholder="Select a option"
-            onChange={(itemId) => setDisplayItemId(itemId)}
-          >
+          <Select placeholder="Select a option">
             {itemList.map((itemObj) => {
               return <Option value={itemObj.id}>{itemObj.itemName}</Option>;
             })}

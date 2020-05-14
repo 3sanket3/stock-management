@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "antd";
+import { Input, message } from "antd";
 import { firestore } from "firebase";
 import {
   Wrapper,
@@ -25,9 +25,11 @@ function AddNewItem() {
       };
       console.log("the docData", docData);
       await doc.set(docData);
+      message.success("New item added successfully");
       history.push("/");
     } catch (e) {
       console.log(e);
+      message.error("Error occurred");
     }
   };
   const onFinishFailed = (errorInfo) => {

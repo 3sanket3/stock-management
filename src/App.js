@@ -17,6 +17,7 @@ import {
   AddNewItem,
   Purchase,
   Sales,
+  Transactions,
   StockSummary,
 } from "./pages";
 
@@ -28,7 +29,7 @@ firebase.initializeApp({
   storageBucket: "stock-mgmt-3sanket3.appspot.com",
   messagingSenderId: "404925228391",
   appId: "1:404925228391:web:2cc30d3fed8c3c7f02fbc2",
-  measurementId: "G-LWJWWYEEJL"
+  measurementId: "G-LWJWWYEEJL",
 });
 firebase.analytics();
 function App() {
@@ -82,6 +83,9 @@ function App() {
             </Route>
             <Route path="/home/stock-summary">
               <StockSummary />
+            </Route>
+            <Route path="/home/transactions">
+              <Transactions />
             </Route>
             <Route path="/">
               <Home />
