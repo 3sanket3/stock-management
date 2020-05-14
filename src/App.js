@@ -21,14 +21,14 @@ import {
 } from "./pages";
 
 firebase.initializeApp({
-  apiKey: "AIzaSyCGmf9rwlQ0O_PmNtCSktLKt5_U7ARBcfk",
-  authDomain: "stock-management-21fc2.firebaseapp.com",
-  databaseURL: "https://stock-management-21fc2.firebaseio.com",
-  projectId: "stock-management-21fc2",
-  storageBucket: "stock-management-21fc2.appspot.com",
-  messagingSenderId: "321740486636",
-  appId: "1:321740486636:web:c69e0a8d72ae16e11232c9",
-  measurementId: "G-XMNPM7HRN3",
+  apiKey: "AIzaSyB72n9pfCNfcGsHFcLPLxGIHbOM2j1pcgc",
+  authDomain: "stock-mgmt-3sanket3.firebaseapp.com",
+  databaseURL: "https://stock-mgmt-3sanket3.firebaseio.com",
+  projectId: "stock-mgmt-3sanket3",
+  storageBucket: "stock-mgmt-3sanket3.appspot.com",
+  messagingSenderId: "404925228391",
+  appId: "1:404925228391:web:2cc30d3fed8c3c7f02fbc2",
+  measurementId: "G-LWJWWYEEJL"
 });
 firebase.analytics();
 function App() {
