@@ -7,7 +7,10 @@ export const onItemCreate = functions.firestore
   .onCreate(async (snap, context) => {
     const data = snap.data();
     if (data) {
-      await snap.ref.update({ closingStock: data.openingStock });
+      await snap.ref.update({
+        closingStock: data.openingStock,
+        createdOn: admin.firestore.FieldValue.serverTimestamp(),
+      });
     }
   });
 
@@ -15,6 +18,9 @@ export const onTransactionCreate = functions.firestore
   .document(`/transactions/{id}`)
   .onCreate(async (snap, context) => {
     await updateClosingStock(snap, "create");
+    await snap.ref.update({
+      createdOn: admin.firestore.FieldValue.serverTimestamp(),
+    });
   });
 
 export const onTransactionDelete = functions.firestore
