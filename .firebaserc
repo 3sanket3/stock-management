@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "stock-mgmt-3sanket3"
+    "default": "stock-mgmt-3sanket3",
+    "dev": "dev-stock-mgmt-3sanket3"
   }
 }
