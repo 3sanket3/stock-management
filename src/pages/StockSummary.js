@@ -4,7 +4,7 @@ import { Table } from "antd";
 import { Wrapper, StyledH2 } from "../styles/form";
 function StockSummary() {
   const [itemList, setItemList] = useState([]);
-
+  //testing
   useEffect(() => {
     const fetchData = async () => {
       const unsubscribe = await firestore()
