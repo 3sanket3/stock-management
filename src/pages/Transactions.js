@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { firestore } from "firebase";
-import { Table, Select } from "antd";
+import { Table, Select, Popconfirm, message } from "antd";
 import {
   Wrapper,
   StyledButton,
@@ -8,7 +8,9 @@ import {
   StyledItem,
   StyledH2,
 } from "../styles/form";
+import { Link } from "react-router-dom";
 const { Option } = Select;
+
 function Transactions() {
   const [itemList, setItemList] = useState([]);
   const [transactionList, setTransactionList] = useState([]);
@@ -17,21 +19,43 @@ function Transactions() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const itemsRecords = await firestore().collection("items").get();
+      const unsubscribe = await firestore()
+        .collection("items")
+        .onSnapshot((itemsRecords) => {
+          const tempItemList = [];
 
-      const tempItemList = [];
+          for (const doc of itemsRecords.docs) {
+            tempItemList.push(doc.data());
+          }
 
-      for (const doc of itemsRecords.docs) {
-        tempItemList.push(doc.data());
-      }
+          console.log("Get ItemList", tempItemList);
 
-      console.log("Get ItemList", tempItemList);
-
-      setItemList(tempItemList);
+          setItemList(tempItemList);
+        });
+      return () => unsubscribe();
     };
 
     fetchData();
   }, []);
+
+  async function DeleteTransaction(transactionId) {
+    console.log("transactionId", transactionId);
+    try {
+      const deletedRecords = await firestore()
+        .collection("transactions")
+        .doc(transactionId)
+        .delete();
+
+      const filterRecord = transactionList.filter(
+        (item) => item.id !== transactionId
+      );
+      console.log("Filter Record", filterRecord);
+      setTransactionList(filterRecord);
+      message.success("The successfully Delete the transaction");
+    } catch (e) {
+      console.log("the error is", e);
+    }
+  }
 
   const columns = [
     // { title: "Id", dataIndex: "id", key: "id" },
@@ -57,6 +81,20 @@ function Transactions() {
       dataIndex: "",
       key: "",
       render: (itemList) => itemList.purchaseQuantity - itemList.salesQuantity,
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (transactionInfo) => (
+        <Popconfirm
+          title="Are you sure delete this task?"
+          onConfirm={() => DeleteTransaction(transactionInfo.id)}
+          okText="Yes"
+          cancelText="No"
+        >
+          <Link to="">Delete</Link>
+        </Popconfirm>
+      ),
     },
   ];
   const onFinish = async (values) => {

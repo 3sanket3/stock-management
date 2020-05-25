@@ -94,11 +94,11 @@ function App() {
             <Route path="/home/sales">
               <Sales />
             </Route>
-            <Route path="/home/stock-summary">
-              <StockSummary />
-            </Route>
             <Route path="/home/transactions">
               <Transactions />
+            </Route>
+            <Route path="/home/stock-summary">
+              <StockSummary />
             </Route>
             <Route path="/">
               <Home />

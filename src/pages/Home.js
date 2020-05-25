@@ -33,14 +33,14 @@ function Home() {
           <button type="button">Sales</button>
         </div>
       </StyledLink>
-      <StyledLink to={"/home/stock-summary"}>
-        <div>
-          <button type="button">Stock Summary</button>
-        </div>
-      </StyledLink>
       <StyledLink to={"/home/transactions"}>
         <div>
           <button type="button">Transactions</button>
+        </div>
+      </StyledLink>
+      <StyledLink to={"/home/stock-summary"}>
+        <div>
+          <button type="button">Stock Summary</button>
         </div>
       </StyledLink>
     </Wrapper>
