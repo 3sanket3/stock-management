@@ -168,8 +168,6 @@ function Transactions() {
             </Select>
           </StyledItem>
 
-          <StyledItem label="Opening Stock">{itemList.openingStock}</StyledItem>
-
           <StyledItem>
             <StyledButton type="primary" htmlType="submit">
               Search
