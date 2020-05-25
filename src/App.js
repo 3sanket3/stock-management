@@ -85,19 +85,19 @@ function App() {
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/home/add-new-item">
+            <Route path="/add-new-item">
               <AddNewItem />
             </Route>
-            <Route path="/home/purchase">
+            <Route path="/purchase">
               <Purchase />
             </Route>
-            <Route path="/home/sales">
+            <Route path="/sales">
               <Sales />
             </Route>
-            <Route path="/home/transactions">
+            <Route path="/transactions">
               <Transactions />
             </Route>
-            <Route path="/home/stock-summary">
+            <Route path="/stock-summary">
               <StockSummary />
             </Route>
             <Route path="/">

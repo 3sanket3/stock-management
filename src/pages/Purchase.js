@@ -74,7 +74,7 @@ function Purchase() {
         onFinishFailed={onFinishFailed}
       >
         <StyledH2>Purchase</StyledH2>
-        <Link to={"/home/add-new-item"}>
+        <Link to={"/add-new-item"}>
           <div>
             <button type="button">AddNewItem</button>
           </div>

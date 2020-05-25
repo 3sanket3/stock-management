@@ -16,25 +16,22 @@ function StockSummary() {
   const [form] = StyledForm.useForm();
   //testing
   useEffect(() => {
-    const fetchData = async () => {
-      const unsubscribe = await firestore()
-        .collection("items")
-        .onSnapshot((itemRecords) => {
-          const tempItemList = [];
+    const unsubscribe = firestore()
+      .collection("items")
+      .onSnapshot((itemRecords) => {
+        const tempItemList = [];
 
-          for (const doc of itemRecords.docs) {
-            tempItemList.push(doc.data());
-          }
+        for (const doc of itemRecords.docs) {
+          tempItemList.push(doc.data());
+        }
 
-          console.log("Get ItemList", tempItemList);
+        console.log("Get ItemList", tempItemList);
 
-          setItemList(tempItemList);
-          setTableItemList(tempItemList);
-        });
-      return () => unsubscribe();
-    };
+        setItemList(tempItemList);
+        setTableItemList(tempItemList);
+      });
 
-    return fetchData();
+    return () => unsubscribe();
   }, []);
 
   const onFinish = async (values) => {

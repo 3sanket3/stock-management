@@ -77,7 +77,7 @@ function Sales() {
         onFinishFailed={onFinishFailed}
       >
         <StyledH2>Sales</StyledH2>
-        <Link to={"/home/add-new-item"}>
+        <Link to={"/add-new-item"}>
           <div style={{ marginLeft: "200px" }}>
             <button type="button">AddNewItem</button>
           </div>

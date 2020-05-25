@@ -18,27 +18,27 @@ function Home() {
   `;
   return (
     <Wrapper>
-      <StyledLink to={"/home/add-new-item"}>
+      <StyledLink to={"/add-new-item"}>
         <div>
           <button type="button">AddNewItem</button>
         </div>
       </StyledLink>
-      <StyledLink to={"/home/purchase"}>
+      <StyledLink to={"/purchase"}>
         <div>
           <button type="button">Purchase</button>
         </div>
       </StyledLink>
-      <StyledLink to={"/home/sales"}>
+      <StyledLink to={"/sales"}>
         <div>
           <button type="button">Sales</button>
         </div>
       </StyledLink>
-      <StyledLink to={"/home/transactions"}>
+      <StyledLink to={"/transactions"}>
         <div>
           <button type="button">Transactions</button>
         </div>
       </StyledLink>
-      <StyledLink to={"/home/stock-summary"}>
+      <StyledLink to={"/stock-summary"}>
         <div>
           <button type="button">Stock Summary</button>
         </div>
