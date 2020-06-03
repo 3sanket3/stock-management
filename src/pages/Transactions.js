@@ -30,7 +30,11 @@ function Transactions() {
 
           console.log("Get ItemList", tempItemList);
 
-          setItemList(tempItemList);
+          setItemList(
+            tempItemList.sort((first, second) =>
+              first.itemName < second.itemName ? -1 : 1
+            )
+          );
         });
       return () => unsubscribe();
     };
