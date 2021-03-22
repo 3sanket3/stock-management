@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { firestore } from "firebase";
-import { Table, Select } from "antd";
+import React, {useEffect, useState} from "react";
+import {firestore} from "firebase";
+import {Table, Select, Button} from "antd";
 import {
   Wrapper,
   StyledH2,
@@ -8,12 +8,13 @@ import {
   StyledForm,
   StyledItem,
 } from "../styles/form";
-const { Option } = Select;
+const {Option} = Select;
 
 function StockSummary() {
   const [itemList, setItemList] = useState([]);
   const [tableItemList, setTableItemList] = useState([]);
   const [form] = StyledForm.useForm();
+  const [isDeleting, setDeleing] = useState(false);
   //testing
   useEffect(() => {
     const unsubscribe = firestore()
@@ -82,6 +83,43 @@ function StockSummary() {
       dataIndex: "closingStock",
       key: "closingStock",
     },
+    {
+      title: "Delete",
+      key: "delete",
+      render: (text, record) => (
+        <Button
+          danger
+          onClick={async () => {
+            if (
+              window.confirm(
+                `Are you sure to delete "${record.itemName}"? This process is irreversible.`
+              )
+            ) {
+              try {
+                setDeleing(true);
+
+                await firestore().collection("items").doc(record.id).delete();
+                const records = await firestore()
+                  .collection("transactions")
+                  .where("itemId", "==", record.id)
+                  .get();
+                for (const doc of records.docs) {
+                  await doc.ref.delete();
+                }
+              } catch (e) {
+                alert(`Error occured while deleting ${record.itemName}`);
+              } finally {
+                setDeleing(false);
+              }
+            }
+            console.log("left pop up");
+          }}
+        >
+          {" "}
+          Delete
+        </Button>
+      ),
+    },
   ];
 
   return (
@@ -98,7 +136,7 @@ function StockSummary() {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
-          <StyledItem label="Item" rules={[{ required: true }]} name="itemId">
+          <StyledItem label="Item" rules={[{required: true}]} name="itemId">
             <Select placeholder="Select a option">
               {itemList.map((itemObj) => {
                 return (
@@ -117,6 +155,7 @@ function StockSummary() {
           </StyledItem>
         </StyledForm>
 
+        {isDeleting ? <h3>Deleting item...</h3> : null}
         <Table columns={columns} dataSource={tableItemList} />
       </Wrapper>
     </div>
