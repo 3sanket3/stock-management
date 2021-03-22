@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { firestore } from "firebase";
-import { Table, Select, Popconfirm, message } from "antd";
+import React, {useEffect, useState} from "react";
+import {firestore} from "firebase";
+import {Table, Select, Popconfirm, message} from "antd";
 import {
   Wrapper,
   StyledButton,
@@ -8,8 +8,8 @@ import {
   StyledItem,
   StyledH2,
 } from "../styles/form";
-import { Link } from "react-router-dom";
-const { Option } = Select;
+import {Link} from "react-router-dom";
+const {Option} = Select;
 
 function Transactions() {
   const [itemList, setItemList] = useState([]);
@@ -45,10 +45,7 @@ function Transactions() {
   async function DeleteTransaction(transactionId) {
     console.log("transactionId", transactionId);
     try {
-      const deletedRecords = await firestore()
-        .collection("transactions")
-        .doc(transactionId)
-        .delete();
+      await firestore().collection("transactions").doc(transactionId).delete();
 
       const filterRecord = transactionList.filter(
         (item) => item.id !== transactionId
@@ -148,7 +145,7 @@ function Transactions() {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
-          <StyledItem label="Item" rules={[{ required: true }]} name="itemId">
+          <StyledItem label="Item" rules={[{required: true}]} name="itemId">
             <Select placeholder="Select a option">
               {itemList.map((itemObj) => {
                 return (
@@ -160,7 +157,7 @@ function Transactions() {
             </Select>
           </StyledItem>
 
-          <StyledItem label="Type" rules={[{ required: true }]} name="type">
+          <StyledItem label="Type" rules={[{required: true}]} name="type">
             <Select placeholder="Select a option">
               <Option value="salesQuantity" key="Sales">
                 Sales
